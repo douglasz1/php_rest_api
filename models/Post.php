@@ -66,4 +66,21 @@
           $this->category_id = $row['category_id'];
           $this->category_name = $row['category_name'];
     }
+
+    // Create Post
+    public function create() {
+        // Create query
+        $query = 'INSERT INTO ' . $this->table . '
+        SET
+        title = :title,
+        body = :body,
+        author = :author,
+        category_id = :category_id';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Clean data
+        $this->title = htmlspecialchars(strip_tags($this->title));
+    }
 }
